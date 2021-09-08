@@ -2,7 +2,6 @@ package deber.busqueda;
 
 public class Estudiante {
 	
-
 	public String cedula;
 
 	public String getCedula() {
@@ -17,7 +16,4 @@ public class Estudiante {
 	public String toString() {
 		return "Estudiante [cedula=" + cedula + "]";
 	}
-	
-	
-
 }

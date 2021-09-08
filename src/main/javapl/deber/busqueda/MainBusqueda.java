@@ -55,8 +55,14 @@ public class MainBusqueda extends Estudiante{
 					if (cedula1.equals(cedula2)){
 						System.out.println("Estudiante registrado");
 					}
-					
 				}
+				System.out.println("*************************************");
+				System.out.println("");
+				System.out.println("       1. Ingresar estudiante");
+				System.out.println("       2. Buscar estudiante");
+				System.out.println("       3. SALIR");
+				System.out.println("");
+				System.out.println("*************************************");
 			}else if (num==3){
 				System.out.println("Saliendo del sistema");
 			}
