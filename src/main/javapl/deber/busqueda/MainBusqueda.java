@@ -3,22 +3,14 @@ package deber.busqueda;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class MainBusqueda{
+public class MainBusqueda extends Estudiante{
 	
-	private long cedula;
-
-	public long getCedula() {
-		return cedula;
-	}
-
-	public void setCedula(long cedula) {
-		this.cedula = cedula;
-	}
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		Scanner teclado=new Scanner(System.in);
+		Scanner teclado2=new Scanner(System.in);
+		
 		
 		System.out.println("*************************************");
 		System.out.println("");
@@ -31,14 +23,14 @@ public class MainBusqueda{
 		int num=teclado.nextInt();
 		int numEstudiante=(-1);
 		
-		MainBusqueda [] datosCedula=new MainBusqueda [5];
+		Estudiante [] datosCedula=new Estudiante [5];
 		
 		while (num==1) {
 			System.out.println("Ingresar cédula del estudiante");
-			long cedula=teclado.nextLong();
+			String cedula=teclado2.nextLine();
 		    numEstudiante=numEstudiante+1;
 		    
-		    MainBusqueda cedulaEstudiante=new MainBusqueda();
+		    Estudiante cedulaEstudiante=new Estudiante();
 		    cedulaEstudiante.setCedula(cedula);
 
 			datosCedula[numEstudiante]=cedulaEstudiante;
@@ -54,26 +46,22 @@ public class MainBusqueda{
 			num=teclado.nextInt();
 			
 			if (num==2) {
-				System.out.println(Arrays.toString(datosCedula));
 				System.out.println("Buscar cedula de estudiante");
-				long cedula2=teclado.nextLong();
-				boolean comparacion=datosCedula[0].equals(cedula2);
-				boolean comparacion2=datosCedula[1].equals(cedula2);
-				boolean comparacion3=datosCedula[2].equals(cedula2);
-				boolean comparacion4=datosCedula[3].equals(cedula2);
-				boolean comparacion5=datosCedula[4].equals(cedula2);
-				System.out.println(comparacion);
-				System.out.println(comparacion2);
-				System.out.println(comparacion3);
-				System.out.println(comparacion4);
-				System.out.println(comparacion5);
-			}else{
+				String cedula2=teclado2.nextLine();
+				
+				for (int i=0; i<5; i++) {
+					Estudiante cedulaComparar=datosCedula[i];
+					String cedula1 = cedulaComparar.getCedula();
+					if (cedula1.equals(cedula2)){
+						System.out.println("Estudiante registrado");
+					}
+					
+				}
+			}else if (num==3){
 				System.out.println("Saliendo del sistema");
 			}
 		
 		}
-		
-
 		
 	}
 
