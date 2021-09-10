@@ -34,12 +34,7 @@ public class Paciente {
 	public static void setNacionalidad(String nacionalidad) {
 		Paciente.nacionalidad = nacionalidad;
 	}
-	public static int getMesesAnio() {
-		return mesesAnio;
-	}
-	public static void setMesesAnio(int mesesAnio) {
-		Paciente.mesesAnio = mesesAnio;
-	}
+	
 	public static int getEdadLimite() {
 		return edadLimite;
 	}
