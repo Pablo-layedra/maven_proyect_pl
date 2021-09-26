@@ -1,6 +1,7 @@
 package ejercicios.fechas;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class MainFechas {
@@ -50,6 +51,11 @@ public class MainFechas {
 		curso3.setFechaFin(nuevaFecha);
 		System.out.println("Nombre curso: "+curso3.getNombreCurso());
 		System.out.println("Fecha de inicio "+ curso3.getFechaInicio());
-		System.out.println("Fecha de fin "+ curso3.getFechaFin());
+		System.out.println("Fecha de fin "+ curso3.getFechaFin().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		
+		LocalDate today3= LocalDate.now();
+		System.out.println(today3.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		System.out.println(today3.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		
 	}
 }

@@ -21,6 +21,7 @@ public class MainList {
 		
 		int vector[]=new int[10];
 		
+		
 	}
 
 }
