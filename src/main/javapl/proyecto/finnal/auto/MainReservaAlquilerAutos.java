@@ -20,6 +20,7 @@ public class MainReservaAlquilerAutos extends Carro {
 		Scanner teclado2 = new Scanner(System.in);
 		Scanner teclado3 = new Scanner(System.in);
 		Scanner teclado4 = new Scanner(System.in);
+		Scanner teclado5 = new Scanner(System.in);
 		String opcion1;
 		String opcion2;
 
@@ -27,11 +28,11 @@ public class MainReservaAlquilerAutos extends Carro {
 		List<Cliente> reservaCliente = new ArrayList<Cliente>();
 
 		LocalDate today = LocalDate.now();
-		System.out.println(today.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		today.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		LocalDate diaDeEntrega = today.plusDays(2);
-		System.out.println(diaDeEntrega.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		diaDeEntrega.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		LocalDate diaDisponibilidad = diaDeEntrega.plusDays(1);
-		System.out.println(diaDisponibilidad.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		diaDisponibilidad.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
 		Carro carro1 = new Carro();
 		carro1.setPlacaAuto("PSG-1500");
@@ -280,13 +281,13 @@ public class MainReservaAlquilerAutos extends Carro {
 				case "b":
 					System.out.println();
 					System.out.println("Ingresar placa del auto (ejemplo PPP-9999)");
-					String placaEscrita = teclado2.nextLine();
+					String placaEscrita = teclado3.nextLine();
 
 					boolean comparacion = false;
 
-					for (int i = 0; i < cantidadCarros.size(); i++) {
-						Carro carroComparar = cantidadCarros.get(i);
-						String carroExistente = carroComparar.getPlacaAuto();
+					for (int i = 0; i < reservaCliente.size(); i++) {
+						Cliente carroComparar = reservaCliente.get(i);
+						String carroExistente = carroComparar.getCarro().getPlacaAuto();
 						boolean comparacionLocal = placaEscrita.equals((carroExistente));
 
 						if (comparacionLocal == true) {
@@ -294,35 +295,82 @@ public class MainReservaAlquilerAutos extends Carro {
 							String disponibilidadCarro = carroComparar.getEstadoAuto();
 							System.out.println();
 
-							if (disponibilidadCarro.equals("Reservado")) {
-								
+							for (int i2 = i; i2 < reservaCliente.size(); i2++) {
 								System.out.println("Datos del auto reservado");
-								System.out.println(reservaCliente.get(i));
+								System.out.println(reservaCliente.get(i2));
 								System.out.println();
 								System.out.println("Escoja la opcion: ");
 								System.out.println("Alquilar");
 								System.out.println("No alquilar");
 								System.out.println();
-								String alquiler=teclado3.nextLine();
+							}
+							
+							String alquiler = teclado3.nextLine();
+
+							if (alquiler.equals("Alquilar")) {
+								reservaCliente.get(i).setEstadoAuto("Alquilado");
+								System.out.println();
+								System.out.println("El auto fue alquilado exitosamente");
+								System.out.println("Fecha de entrega del vehiculo: "
+										+ carroComparar.getCarro().getFechaEntregaAuto());
+
+							} else if (alquiler.equals("No alquilar")) {
+								System.out.println();
+								System.out.println("El auto no fue alquilado");
+								System.out.println();
+							}
+						}
+					}
+					break;
+				case "c":
+					System.out.println();
+					System.out.println("Ingresar placa del auto (ejemplo PPP-9999)");
+					String placaEscrita2 = teclado5.nextLine();
+
+					boolean comparacion2 = false;
+
+					for (int i = 0; i < reservaCliente.size(); i++) {
+						Cliente carroComparar = reservaCliente.get(i);
+						String carroExistente = carroComparar.getCarro().getPlacaAuto();
+						boolean comparacionPlaca = placaEscrita2.equals((carroExistente));
+
+						if (comparacionPlaca == true) {
+							comparacion2 = true;
+							String carroAlquilado = carroComparar.getCarro().getEstadoAuto();
+
+							if (carroAlquilado.equals("Alquilado")) {
+								System.out.println("Ingresar cedula del cliente");
+								String cedulaCliente2 = teclado5.nextLine();
 								
-								if (alquiler.equals("Alquilar")) {
-									cantidadCarros.get(i).setEstadoAuto("Alquilado");
+								Cliente clienteComparar = reservaCliente.get(i);
+								String clienteExistente = clienteComparar.getCedula();
+								boolean clienteAlquiler = cedulaCliente2.equals(clienteExistente);
+								
+								if (clienteAlquiler == true) {
 									System.out.println();
-									System.out.println("El auto fue alquilado exitosamente");
-									System.out.println("Fecha de entrega del vehiculo: "+cantidadCarros.get(i).getFechaEntregaAuto());
-									
-								}else if (alquiler.equals("No alquilar")) {
+									System.out.println("Auto alquilado");
 									System.out.println();
-									System.out.println("El auto no fue alquilado");
-									System.out.println();
+									System.out.println(reservaCliente.get(i));
+									System.out.println("Escoja la opcion: ");
+									System.out.println("Aplazar fecha de entrega");
+									System.out.println("No aplazar fecha de entrega");
+									String aplazar = teclado3.nextLine();
+									switch (aplazar) {
+									case "Aplazar":
+										System.out.println();
+										LocalDate nuevaFecha = diaDeEntrega.plusDays(3);
+										reservaCliente.get(i).setFechaEntregaAuto(nuevaFecha);
+										System.out.println("Se agregaron 3 días a la fecha de entrega");
+										System.out.println(reservaCliente.get(i));
+										break;
+									case "No aplazar":
+										System.out.println("Fecha no aplazada");
+										break;
+									}
 								}
 							}
 						}
 					}
-
-					break;
-				case "c":
-					System.out.println();
 					break;
 				}
 				break;
